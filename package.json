@@ -1,0 +1,11 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Vanilla JS Glassmorphic Weather Dashboard",
+  "scripts": {
+    "build": "node ./scripts/build-env.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
