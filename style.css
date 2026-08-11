@@ -1,0 +1,16 @@
+/* ==========================================================================
+   MAIN STYLE ENTRY POINT (style.css)
+   
+   CSS EXECUTION & CASCADE FLOW:
+   When index.html loads style.css, the browser imports child stylesheets in order:
+   
+   1. variable.css    ──► Loads :root design tokens (colors, radii, transitions)
+   2. base.css        ──► Resets browser defaults, sets typography & <body> layout
+   3. animations.css  ──► Registers @keyframes & animation utility classes
+   4. components.css  ──► Applies styles to Search Form, Hero Card, Stats & Hourly Timeline
+   ========================================================================== */
+
+@import './css/variable.css';
+@import './css/base.css';
+@import './css/animations.css';
+@import './css/components.css';

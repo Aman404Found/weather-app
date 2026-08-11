@@ -1,0 +1,477 @@
+/* ==========================================================================
+   COMPONENT STYLES (components.css)
+   Execution Order: 4th (Loaded after variable.css, base.css, animations.css)
+   Purpose: Defines visual styling for all individual UI components:
+            1. Search Bar & Form Controls
+            2. Main Content Wrapper
+            3. Hero Weather Card & Gradient Temperature Display
+            4. Weather Statistics Grid (Auto-Fit CSS Grid)
+            5. 24-Hour Timeline Forecast Slider (CSS Scroll Snap)
+   ========================================================================== */
+
+/* ==========================================================================
+   SECTION 1: SITE HEADER & SEARCH BAR
+   ========================================================================== */
+
+.site-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Search Form Wrapper (Glassmorphism Pill Shape) */
+.search-form {
+    width: 100%;
+    display: flex;
+
+    /* align-items: center; Why: Vertically centers input text and icon buttons inside form. */
+    align-items: center;
+
+    /* gap: 0.5rem; Why: Creates 8px horizontal space between input field and action buttons. */
+    gap: 0.5rem;
+
+    /* background: var(--card-bg);
+       Why: Uses 70% opaque slate background token for glass transparency. */
+    background: var(--card-bg);
+
+    /* backdrop-filter: blur(12px);
+       Why: Blurs background pixels BEHIND the form for a modern frosted glass aesthetic. */
+    backdrop-filter: blur(12px);
+
+    /* border: 1px solid var(--card-border);
+       Why: Adds a faint white border to define the form edges over the dark gradient. */
+    border: 1px solid var(--card-border);
+
+    /* padding: 0.5rem 0.75rem; Why: Internal spacing around input and buttons. */
+    padding: 0.5rem 0.75rem;
+
+    /* border-radius: var(--radius-full);
+       Why: 9999px border radius creates a smooth, rounded pill search bar layout. */
+    border-radius: var(--radius-full);
+
+    /* box-shadow: var(--glass-shadow); Why: Soft ambient drop shadow under search bar. */
+    box-shadow: var(--glass-shadow);
+
+    /* transition: border-color var(--transition-fast);
+       Why: Smoothly animates border highlight when input gains focus. */
+    transition: border-color var(--transition-fast);
+}
+
+/* :focus-within pseudo-class
+   Triggers when ANY child element inside .search-form (like the <input>) receives focus. */
+.search-form:focus-within {
+    /* border-color: var(--accent-blue);
+       Why: Highlights the entire search bar border in sky blue when user clicks/taps to type. */
+    border-color: var(--accent-blue);
+}
+
+/* Search Input Field */
+.search-input {
+    /* flex: 1;
+       Why: Shorthand for flex-grow: 1. Forces input to expand and take up all remaining horizontal space,
+       pushing the geo and search buttons cleanly to the right side. */
+    flex: 1;
+
+    /* background: transparent;
+       Why: Removes browser default white background so form background shows through. */
+    background: transparent;
+
+    /* border: none; outline: none;
+       Why: Removes default browser border and native blue focus outline. */
+    border: none;
+    outline: none;
+
+    /* color: var(--text-primary); Why: Bright off-white text for typed city names. */
+    color: var(--text-primary);
+
+    /* font-size: 1rem; Why: Standard readable 16px text size. */
+    font-size: 1rem;
+
+    /* padding: 0.5rem; Why: Internal padding so text isn't cramped against edges. */
+    padding: 0.5rem;
+
+    /* font-family: inherit;
+       Why: CRUCIAL! Form inputs do NOT inherit body font by default in browsers.
+       Forces input to use 'Outfit' font. */
+    font-family: inherit;
+}
+
+/* ::placeholder pseudo-element
+   Styles the hint text inside input when empty ("Search city..."). */
+.search-input::placeholder {
+    /* color: var(--text-muted); Why: Subtle muted gray color indicating helper text. */
+    color: var(--text-muted);
+}
+
+/* Main Content Wrapper (Contains Hero Card & Forecast Timeline) */
+.main-content {
+    width: 100%;
+    
+    /* display: flex; flex-direction: column;
+       Why: Stacks the Hero Weather Card and the 24-Hour Forecast section vertically. */
+    display: flex;
+    flex-direction: column;
+
+    /* gap: 2.5rem;
+       Why: Creates clean 40px vertical spacing between hero card and hourly timeline. */
+    gap: 2.5rem;
+}
+
+/* Circular Icon Buttons (Geolocation, Search, Refresh) */
+.icon-btn {
+    /* background: rgba(255, 255, 255, 0.05); Why: 5% translucent white button background. */
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+
+    /* width: 40px; height: 40px; border-radius: 50%;
+       Why: Perfect square dimensions combined with 50% radius produces a perfect circle. */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    /* display: flex; align-items: center; justify-content: center;
+       Why: Centers emoji/icon perfectly in the middle of the circular button. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* cursor: pointer; Why: Changes mouse pointer to a hand cursor to show interactivity. */
+    cursor: pointer;
+
+    /* transition: all var(--transition-fast); Why: Smoothly animates hover scale & background. */
+    transition: all var(--transition-fast);
+}
+
+/* Icon Button Hover State */
+.icon-btn:hover {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+
+    /* transform: scale(1.05);
+       Why: Grows button by 5% on hover for tactile visual micro-interaction feedback. */
+    transform: scale(1.05);
+}
+
+
+/* ==========================================================================
+   SECTION 2: HERO WEATHER CARD
+   ========================================================================== */
+
+.weather-card {
+    background: var(--card-bg);
+
+    /* backdrop-filter: blur(16px);
+       Why: Deep blur effect giving hero card a heavy frosted glass appearance. */
+    backdrop-filter: blur(16px);
+
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+
+    /* padding: 2rem; Why: 32px padding inside card for spacious layout. */
+    padding: 2rem;
+
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Card Header (Location Title & Refresh Button) */
+.weather-header {
+    display: flex;
+
+    /* justify-content: space-between;
+       Why: Pushes city name to far left and refresh button to far right. */
+    justify-content: space-between;
+
+    /* align-items: flex-start; Why: Aligns items along top edge. */
+    align-items: flex-start;
+}
+
+.location-info h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.location-info p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+
+    /* margin-top: 0.25rem; Why: Small 4px top margin separating date from city title. */
+    margin-top: 0.25rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Main Temperature & Weather Condition Display */
+.weather-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.temp-display {
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Giant Temperature Number with Gradient Fill */
+.temp-number {
+    /* font-size: 4.5rem; Why: Large hero temperature typography. */
+    font-size: 4.5rem;
+    font-weight: 700;
+
+    /* line-height: 1; Why: Prevents extra vertical line height spacing around big text. */
+    line-height: 1;
+
+    /* linear-gradient background from pure white to soft slate gray */
+    background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+
+    /* -webkit-background-clip: text;
+       Why: Clips the background gradient to the exact outline shape of the numbers. */
+    -webkit-background-clip: text;
+
+    /* -webkit-text-fill-color: transparent;
+       Why: Makes text fill transparent so the gradient background shows through text! */
+    -webkit-text-fill-color: transparent;
+}
+
+/* Temperature Unit (°C) */
+.temp-unit {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--accent-blue);
+    margin-top: 0.5rem;
+    margin-left: 0.25rem;
+}
+
+/* Weather Condition (Emoji/Icon + Text) */
+.condition-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.weather-icon {
+    width: 80px;
+    height: 80px;
+
+    /* object-fit: contain; Why: Scales image proportionally without distortion. */
+    object-fit: contain;
+
+    /* filter: drop-shadow(...);
+       Why: Adds a cyan glowing drop shadow that follows transparent PNG/SVG outlines! */
+    filter: drop-shadow(0 4px 12px rgba(56, 189, 248, 0.3));
+}
+
+.condition-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+
+/* ==========================================================================
+   SECTION 3: WEATHER STATISTICS GRID
+   ========================================================================== */
+
+.weather-stats {
+    /* display: grid;
+       Why: Switches container to 2D CSS Grid layout mode. */
+    display: grid;
+
+    /* grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+       Why: RESPONSIVE GRID MAGIC! 
+       1. auto-fit: Creates as many columns as will fit in container width.
+       2. minmax(130px, 1fr): Cards are at least 130px wide, but expand equally (1fr) to fill row.
+       Result: 4 columns on desktop, automatically wraps to 2 columns on mobile without media queries! */
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+
+    gap: 1rem;
+
+    /* border-top: 1px solid var(--card-border);
+       Why: Creates a thin separator line above stats section. */
+    border-top: 1px solid var(--card-border);
+
+    padding-top: 1.5rem;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    /* overflow: hidden; Why: Clips content if text overflows stat box. */
+    overflow: hidden;
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+
+    /* text-transform: uppercase; Why: Converts label to uppercase ("WIND SPEED"). */
+    text-transform: uppercase;
+
+    /* letter-spacing: 0.05em; Why: Adds slight spacing between uppercase letters for clarity. */
+    letter-spacing: 0.05em;
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0.1rem;
+}
+
+
+/* ==========================================================================
+   SECTION 4: 24-HOUR FORECAST TIMELINE (HORIZONTAL SCROLL & SCROLL SNAP)
+   ========================================================================== */
+
+.forecast-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.badge-tag {
+    font-size: 0.75rem;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent-blue);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-weight: 500;
+}
+
+/* Horizontal Timeline Scroll Container */
+.hourly-scroll {
+    display: flex;
+    gap: 0.85rem;
+
+    /* overflow-x: auto;
+       Why: Enables horizontal scrolling when hourly cards exceed container width. */
+    overflow-x: auto;
+
+    padding-bottom: 0.75rem;
+
+    /* scroll-snap-type: x mandatory;
+       Why: CRUCIAL UX PROPERTY! Enforces strict snapping when scrolling horizontally.
+       Cards will always snap neatly to the left edge instead of stopping awkwardly mid-card. */
+    scroll-snap-type: x mandatory;
+}
+
+/* --------------------------------------------------------------------------
+   CUSTOM WEBKIT SCROLLBAR STYLING
+   -------------------------------------------------------------------------- */
+
+/* Scrollbar Track Height */
+.hourly-scroll::-webkit-scrollbar {
+    /* height: 6px; Why: Makes horizontal scrollbar thin and unobtrusive. */
+    height: 6px;
+}
+
+/* Scrollbar Background Track */
+.hourly-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+/* Scrollbar Draggable Thumb */
+.hourly-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+/* Scrollbar Thumb Hover State */
+.hourly-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* --------------------------------------------------------------------------
+   HOURLY FORECAST CARD ITEM
+   -------------------------------------------------------------------------- */
+
+.hourly-card {
+    /* flex: 0 0 90px;
+       Why: Shorthand for flex-grow: 0 | flex-shrink: 0 | flex-basis: 90px.
+       Prevents Flexbox from squishing cards! Each card stays exactly 90px wide in horizontal row. */
+    flex: 0 0 90px;
+
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    /* scroll-snap-align: start;
+       Why: Pairs with parent scroll-snap-type. Snaps card's left edge to scroll container edge. */
+    scroll-snap-align: start;
+
+    transition: all var(--transition-fast);
+}
+
+.hourly-card:hover {
+    border-color: var(--card-hover-border);
+    background: rgba(30, 41, 59, 0.9);
+}
+
+/* Current Hour Card Highlight (.now-card) */
+.hourly-card.now-card {
+    /* border-color: var(--accent-blue);
+       Why: Bright cyan border to visually highlight the current hour card in timeline. */
+    border-color: var(--accent-blue);
+    background: rgba(56, 189, 248, 0.1);
+}
+
+.hourly-time {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.hourly-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.hourly-temp {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.hourly-rain {
+    font-size: 0.75rem;
+    color: var(--accent-blue);
+    font-weight: 500;
+}

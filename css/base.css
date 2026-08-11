@@ -1,0 +1,92 @@
+/* ==========================================================================
+   GLOBAL RESETS & BASE LAYOUT (base.css)
+   Execution Order: 2nd (Loaded right after variable.css)
+   Purpose: Resets default browser quirks, sets up typography standards, 
+            and defines main page flexbox layout constraints.
+   ========================================================================== */
+
+/* Universal Selector (*), ::before, and ::after pseudo-elements.
+   Applies resets to every single element in the DOM without exception. */
+*, *::before, *::after {
+    /* margin: 0; padding: 0;
+       Why: Removes default margins/paddings browsers add to <body>, <h1>, <p>, <ul>, etc.
+       Ensures you start with a clean slate and 100% predictable spacing. */
+    margin: 0;
+    padding: 0;
+
+    /* box-sizing: border-box;
+       Why: CRUCIAL layout property. Forces width and height calculations to INLCUDE
+       padding and borders. Without this, a 100px element + 10px padding becomes 120px wide,
+       causing layout overflow and calculation headaches. */
+    box-sizing: border-box;
+}
+
+/* Root HTML element styling */
+html {
+    /* font-size: 16px;
+       Why: Establishes base font size for relative units (rem).
+       1rem = 16px. Used for accessible responsive typography scaling. */
+    font-size: 16px;
+
+    /* scroll-behavior: smooth;
+       Why: Enables smooth animated scrolling when navigating to page sections/anchors. */
+    scroll-behavior: smooth;
+}
+
+/* Page Body Layout */
+body {
+    /* font-family: Uses 'Outfit' Google Font, falls back to generic sans-serif.
+       Why: Ensures clean typography even if custom font fails to load. */
+    font-family: 'Outfit', sans-serif;
+
+    /* background: Uses the gradient variable defined in variable.css.
+       Why: Applies dark slate ambient background across the entire viewport. */
+    background: var(--bg-gradient);
+
+    /* color: Primary white text color.
+       Why: Sets baseline text color for all child elements unless overridden. */
+    color: var(--text-primary);
+
+    /* min-height: 100vh (100% of Viewport Height).
+       Why: Guarantees the background gradient covers the entire screen even if page content is short. */
+    min-height: 100vh;
+
+    /* display: flex; flex-direction: column;
+       Why: Turns <body> into a vertical flex container so children stack top-to-bottom. */
+    display: flex;
+    flex-direction: column;
+
+    /* align-items: center;
+       Why: Centers child elements horizontally along the cross-axis. */
+    align-items: center;
+
+    /* justify-content: flex-start;
+       Why: Aligns children to start from the top of the page. */
+    justify-content: flex-start;
+
+    /* padding: 2rem (top/bottom) 1rem (left/right).
+       Why: Prevents content from touching the edges of mobile screens. */
+    padding: 2rem 1rem;
+
+    /* overflow-x: hidden;
+       Why: Prevents accidental horizontal scrollbars caused by animations or wide elements on mobile. */
+    overflow-x: hidden;
+}
+
+/* Central Application Container (Limits maximum width for desktop readability) */
+.app-container {
+    /* width: 100%; max-width: 900px;
+       Why: Fluid responsive design pattern! Takes 100% width on mobile screens,
+       but stops stretching once it hits 900px on desktop for optimal readability. */
+    width: 100%;
+    max-width: 900px;
+
+    /* display: flex; flex-direction: column;
+       Why: Stacks search header, main content, and sections vertically with Flexbox layout. */
+    display: flex;
+    flex-direction: column;
+
+    /* gap: 2rem;
+       Why: Creates consistent 32px vertical spacing between search header and main weather section. */
+    gap: 2rem;
+}

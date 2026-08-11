@@ -1,0 +1,89 @@
+/* ==========================================================================
+   DESIGN TOKENS & CSS VARIABLES (variable.css)
+   Execution Order: 1st (Loaded before all other stylesheets)
+   Purpose: Stores global design tokens in :root so colors, sizing, shadows, 
+            and animations are centralized and easy to maintain/theme.
+   ========================================================================== */
+
+/* :root pseudo-class matches the highest-level element in the DOM (<html>).
+   Variables defined here inherit down to all elements in the application. */
+:root {
+
+    /* ----------------------------------------------------------------------
+       1. COLOR PALETTE & GLASSMORPHISM TOKENS
+       ---------------------------------------------------------------------- */
+    
+    /* linear-gradient: Creates a smooth 135-degree color transition from dark navy to slate.
+       Why: Gives the body a modern deep aesthetic instead of a flat single color. */
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+
+    /* rgba(r, g, b, alpha): Red, Green, Blue, Alpha transparency (0.7 = 70% opacity).
+       Why: 70% opacity allows the background gradient to show through, creating glassmorphism. */
+    --card-bg: rgba(30, 41, 59, 0.7);
+
+    /* Subtle white border with 10% opacity.
+       Why: Defines sharp card edges on dark glassmorphic cards without being distracting. */
+    --card-border: rgba(255, 255, 255, 0.1);
+
+    /* Sky blue border with 40% opacity for hover states.
+       Why: Gives interactive elements visual feedback when hovered. */
+    --card-hover-border: rgba(56, 189, 248, 0.4);
+
+    /* box-shadow: X-offset(0), Y-offset(8px), Blur(32px), Spread(0), Color(black 37% opacity).
+       Why: Elevates cards off the background with a soft ambient floating shadow. */
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+    /* ----------------------------------------------------------------------
+       2. TYPOGRAPHY & ACCENT COLORS
+       ---------------------------------------------------------------------- */
+    
+    /* Primary text color (#f8fafc - Off-white).
+       Why: High contrast against dark background for maximum readability. */
+    --text-primary: #f8fafc;
+
+    /* Secondary text color (#94a3b8 - Light slate gray).
+       Why: Used for subheadings and secondary info to establish visual hierarchy. */
+    --text-secondary: #94a3b8;
+
+    /* Muted text color (#64748b - Medium slate gray).
+       Why: Used for labels and subtle details that shouldn't draw immediate attention. */
+    --text-muted: #64748b;
+
+    /* Accent Sky Blue (#38bdf8).
+       Why: Primary brand color used for temperatures, active states, and highlights. */
+    --accent-blue: #38bdf8;
+
+    /* Accent Cyan (#22d3ee).
+       Why: Secondary highlight color for weather conditions or metrics. */
+    --accent-cyan: #22d3ee;
+
+    /* Accent Indigo (#818cf8).
+       Why: Used for badges and tertiary state highlights. */
+    --accent-indigo: #818cf8;
+
+    /* ----------------------------------------------------------------------
+       3. CORNER RADII (BORDER-RADIUS)
+       ---------------------------------------------------------------------- */
+    
+    /* Large card border radius (24px). Why: Smooth, friendly rounded card corners. */
+    --radius-lg: 24px;
+
+    /* Medium element border radius (16px). Why: Used for stat boxes and hourly cards. */
+    --radius-md: 16px;
+
+    /* Small element border radius (12px). Why: Used for smaller tags and badges. */
+    --radius-sm: 12px;
+
+    /* Full pill border radius (9999px). Why: Creates perfect rounded pill shapes for search bar. */
+    --radius-full: 9999px;
+
+    /* ----------------------------------------------------------------------
+       4. TRANSITION SPEEDS
+       ---------------------------------------------------------------------- */
+    
+    /* Fast transition (0.2s ease). Why: Snappy feedback for hover & click states. */
+    --transition-fast: 0.2s ease;
+
+    /* Normal transition (0.3s ease). Why: Smooth transition for card updates and state changes. */
+    --transition-normal: 0.3s ease;
+}

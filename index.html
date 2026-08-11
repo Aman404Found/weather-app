@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmosphere — Weather Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- 1. Header & Location Search Bar -->
+        <header class="site-header">
+            <form id="search-form" class="search-form">
+                <input type="text" id="city-input" class="search-input" placeholder="Search city (e.g., London, Tokyo, New York)..." autocomplete="off" required>
+                <button type="button" id="geo-btn" class="icon-btn" title="Use Current Location" aria-label="Use Current Location">
+                    📍
+                </button>
+                <button type="submit" id="search-btn" class="icon-btn" title="Search" aria-label="Search City">
+                    🔍
+                </button>
+            </form>
+        </header>
+
+        <main class="main-content">
+
+            <!-- 2. Hero Weather Card (Current Weather Details) -->
+            <section class="weather-card animate-fade-in" id="weather-card">
+                
+                <!-- Location & Date Header -->
+                <div class="weather-header">
+                    <div class="location-info">
+                        <h1 id="city-name">Tokyo, Japan</h1>
+                        <p id="current-date">Tuesday, 11 August 2026</p>
+                    </div>
+                    <div class="header-actions">
+                        <button id="refresh-btn" class="icon-btn" title="Refresh Weather Outlook" aria-label="Refresh Weather">
+                            🔄
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Temperature & Condition Display -->
+                <div class="weather-hero">
+                    <div class="temp-display">
+                        <span id="temp-number" class="temp-number">24</span>
+                        <span id="temp-unit" class="temp-unit">&deg;C</span>
+                    </div>
+
+                    <div class="condition-display">
+                        <!-- SVGs or Emoji/Image Placeholders for Weather Condition -->
+                        <span class="weather-icon-emoji" style="font-size: 3.5rem;">⛅</span>
+                        <span id="weather-condition" class="condition-text">Partly Cloudy</span>
+                    </div>
+                </div>
+
+                <!-- Detailed Weather Stats Grid -->
+                <div class="weather-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">💨</span>
+                        <div>
+                            <p class="stat-label">Wind Speed</p>
+                            <p id="wind-speed" class="stat-value">14 km/h</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-item">
+                        <span class="stat-icon">🌧️</span>
+                        <div>
+                            <p class="stat-label">Rain Chance</p>
+                            <p id="rain-chance" class="stat-value">20%</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-item">
+                        <span class="stat-icon">💧</span>
+                        <div>
+                            <p class="stat-label">Humidity</p>
+                            <p id="humidity" class="stat-value">62%</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-item">
+                        <span class="stat-icon">☀️</span>
+                        <div>
+                            <p class="stat-label">UV Index</p>
+                            <p id="uv-index" class="stat-value">5 (Moderate)</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- 3. 24-Hour Forecast Section (Past & Future Timeline) -->
+            <section class="forecast-section animate-fade-in" style="animation-delay: 0.15s;">
+                <div class="section-title">
+                    <span>24-Hour Timeline</span>
+                    <span class="badge-tag">Past & Future 24h</span>
+                </div>
+
+                <!-- Scrollable Horizontal Card Strip -->
+                <div class="hourly-scroll" id="hourly-scroll">
+                    
+                    <!-- Past Hours (Sample) -->
+                    <div class="hourly-card">
+                        <span class="hourly-time">06:00</span>
+                        <span class="hourly-icon">🌅</span>
+                        <span class="hourly-temp">19°</span>
+                        <span class="hourly-rain">0%</span>
+                    </div>
+
+                    <div class="hourly-card">
+                        <span class="hourly-time">08:00</span>
+                        <span class="hourly-icon">🌤️</span>
+                        <span class="hourly-temp">21°</span>
+                        <span class="hourly-rain">10%</span>
+                    </div>
+
+                    <!-- Current Hour (Highlighted) -->
+                    <div class="hourly-card now-card">
+                        <span class="hourly-time">NOW</span>
+                        <span class="hourly-icon">⛅</span>
+                        <span class="hourly-temp">24°</span>
+                        <span class="hourly-rain">20%</span>
+                    </div>
+
+                    <!-- Future Hours (Sample) -->
+                    <div class="hourly-card">
+                        <span class="hourly-time">12:00</span>
+                        <span class="hourly-icon">☀️</span>
+                        <span class="hourly-temp">26°</span>
+                        <span class="hourly-rain">15%</span>
+                    </div>
+
+                    <div class="hourly-card">
+                        <span class="hourly-time">14:00</span>
+                        <span class="hourly-icon">☀️</span>
+                        <span class="hourly-temp">27°</span>
+                        <span class="hourly-rain">10%</span>
+                    </div>
+
+                    <div class="hourly-card">
+                        <span class="hourly-time">16:00</span>
+                        <span class="hourly-icon">⛅</span>
+                        <span class="hourly-temp">25°</span>
+                        <span class="hourly-rain">30%</span>
+                    </div>
+
+                    <div class="hourly-card">
+                        <span class="hourly-time">18:00</span>
+                        <span class="hourly-icon">🌧️</span>
+                        <span class="hourly-temp">22°</span>
+                        <span class="hourly-rain">75%</span>
+                    </div>
+
+                    <div class="hourly-card">
+                        <span class="hourly-time">20:00</span>
+                        <span class="hourly-icon">🌧️</span>
+                        <span class="hourly-temp">20°</span>
+                        <span class="hourly-rain">60%</span>
+                    </div>
+
+                    <div class="hourly-card">
+                        <span class="hourly-time">22:00</span>
+                        <span class="hourly-icon">🌙</span>
+                        <span class="hourly-temp">19°</span>
+                        <span class="hourly-rain">20%</span>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Application Script Entry Point -->
+    <script type="module" src="src/main.js" defer></script>
+</body>
+
+</html>

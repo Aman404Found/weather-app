@@ -1,0 +1,87 @@
+/* ==========================================================================
+   KEYFRAME ANIMATIONS & UTILITY CLASSES (animations.css)
+   Execution Order: 3rd (Loaded after base styles)
+   Purpose: Defines GPU-accelerated keyframe animations and utility classes
+            for page entry, loading spinners, and skeleton loaders.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. @keyframes fadeInUp
+   Use: Animates weather cards sliding up smoothly when data loads.
+   -------------------------------------------------------------------------- */
+@keyframes fadeInUp {
+    /* from (0% keyframe state) */
+    from {
+        /* opacity: 0; Why: Makes element completely invisible at start. */
+        opacity: 0;
+        
+        /* transform: translateY(15px);
+           Why: Moves element 15px down along the Y-axis. GPU hardware-accelerated. */
+        transform: translateY(15px);
+    }
+    /* to (100% keyframe state) */
+    to {
+        /* opacity: 1; Why: Fades element to 100% full visibility. */
+        opacity: 1;
+
+        /* transform: translateY(0); Why: Moves element to its natural position. */
+        transform: translateY(0);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   2. @keyframes spin
+   Use: Continuous 360-degree rotation for the refresh icon during API calls.
+   -------------------------------------------------------------------------- */
+@keyframes spin {
+    from {
+        /* transform: rotate(0deg); Why: Starting rotation angle. */
+        transform: rotate(0deg);
+    }
+    to {
+        /* transform: rotate(360deg); Why: Completes one full 360-degree turn. */
+        transform: rotate(360deg);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. @keyframes pulse
+   Use: Creates a pulsing skeleton loading effect while waiting for API data.
+   -------------------------------------------------------------------------- */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        /* opacity: 0.4; Why: Dims opacity to 40% halfway through to simulate loading glow. */
+        opacity: 0.4;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   4. ANIMATION UTILITY CLASSES (Applied via HTML or JavaScript)
+   -------------------------------------------------------------------------- */
+
+/* .animate-fade-in
+   Applied to: Cards on initial load or search update. */
+.animate-fade-in {
+    /* animation shorthand: name (fadeInUp) | duration (0.5s) | timing (ease) | fill-mode (forwards)
+       Why: 'forwards' keeps the final state (opacity 1) after animation finishes so element doesn't flicker back to invisible! */
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* .spinning
+   Applied to: Refresh button icon when user clicks refresh or searches. */
+.spinning {
+    /* animation shorthand: name (spin) | duration (1s) | timing (linear) | iteration (infinite)
+       Why: 'linear' keeps rotational speed constant; 'infinite' loops continuously until JS removes class. */
+    animation: spin 1s linear infinite;
+}
+
+/* .skeleton-loading
+   Applied to: Placeholder elements while API is fetching. */
+.skeleton-loading {
+    /* animation shorthand: name (pulse) | duration (1.5s) | timing (ease-in-out) | iteration (infinite)
+       Why: Creates a smooth organic pulsing shimmer. */
+    animation: pulse 1.5s ease-in-out infinite;
+}
