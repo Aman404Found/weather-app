@@ -5,8 +5,10 @@
             normalized weather JSON data.
    ========================================================================== */
 
-const WEATHER_API_KEY = 'YOUR_VISUAL_CROSSING_API_KEY';
-const BASE_URL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/';
+import CONFIG from './config.js';
+
+const WEATHER_API_KEY = CONFIG.WEATHER_API_KEY;
+const BASE_URL = CONFIG.BASE_URL;
 
 /**
  * Fetches current weather and 24-hour timeline forecast for a given location.

@@ -11,7 +11,7 @@ An elegant, modern glassmorphic weather web application built using **Vanilla Ja
 
 ## 🔗 Live Demo
 
-👉 **[Click Here for Live Demo](YOUR_LIVE_DEMO_LINK_HERE)** *(Replace this with your deployed link, e.g. Vercel, Netlify, or GitHub Pages)*
+👉 **[Click Here for Live Demo](https://6a7ac0039aa5a632c326e850--taupe-mousse-983e82.netlify.app)**
 
 ---
 
@@ -24,6 +24,7 @@ An elegant, modern glassmorphic weather web application built using **Vanilla Ja
 - **📊 Auto-Fit Statistics Grid**: Fully responsive metric grid (`Wind Speed`, `Rain Chance`, `Humidity`, `UV Index`) using CSS Grid (`repeat(auto-fit, minmax(130px, 1fr))`) without requiring heavy media queries.
 - **⚡ GPU-Accelerated Micro-Animations**: Smooth entry keyframes (`fadeInUp`), loading spinners (`spin`), and skeleton shimmers (`pulse`) for tactile user feedback.
 - **🛡️ Defensive Error Handling**: Complete network validation checking `response.ok` before parsing JSON to catch HTTP 400/401 errors gracefully.
+- **🔐 Environment Variables**: Configured via `.env` and `src/config.js` to protect API keys from git history.
 
 ---
 
@@ -45,12 +46,16 @@ Organized following industry-standard separation of concerns:
 Weather App/
 ├── index.html            # Main HTML5 Semantic Layout
 ├── style.css             # Main Entry Stylesheet (Imports modular CSS)
+├── .env                  # Environment Variables (Ignored in Git)
+├── .env.example          # Template for Environment Configuration
+├── .gitignore            # Git Exclusions File
 ├── css/                  # CSS Design System Modules
 │   ├── variable.css      # CSS Variables & Design Tokens (:root)
 │   ├── base.css          # Reset, Typography & Application Container
 │   ├── animations.css    # GPU Keyframe Animations (@keyframes)
 │   └── components.css    # Search Pill, Hero Card, Stats Grid & Timeline
 └── src/                  # ES Module JavaScript Core
+    ├── config.js         # Environment & Configuration Token Handler
     ├── state.js          # Central Application State & Date Helpers
     ├── api.js            # Network Service & Visual Crossing Fetch Logic
     ├── ui.js             # DOM Caching, Emoji Mapper & Render Functions
@@ -69,7 +74,13 @@ No build tools or heavy Node dependencies required! Run directly in any modern b
    cd weather-app
    ```
 
-2. **Launch with a Local Web Server**:
+2. **Configure Environment Variables**:
+   Copy `.env.example` to create `.env` and add your API key:
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Launch with a Local Web Server**:
    Because the project uses standard ES Modules (`type="module"`), run a lightweight HTTP server:
 
    - **Using VS Code**: Right-click `index.html` ➔ **Open with Live Server**.
@@ -86,14 +97,16 @@ No build tools or heavy Node dependencies required! Run directly in any modern b
 
 ---
 
-## 🔑 API Configuration
+## 🔑 Environment Configuration
 
-The application connects to the **Visual Crossing Weather API**. You can replace the key in `src/api.js`:
+API keys are managed via `.env` and `src/config.js`:
 
-```javascript
-// src/api.js
-const WEATHER_API_KEY = 'YOUR_VISUAL_CROSSING_API_KEY';
+```env
+# .env
+WEATHER_API_KEY=ACEVYVWVQ3WN3MURAGMTVQRBN
 ```
+
+`src/config.js` safely exports `CONFIG.WEATHER_API_KEY` for `src/api.js` to consume.
 
 ---
 
