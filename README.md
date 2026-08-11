@@ -11,7 +11,7 @@ An elegant, modern glassmorphic weather web application built using **Vanilla Ja
 
 ## 🔗 Live Demo
 
-👉 **[Click Here for Live Demo](https://6a7ac0039aa5a632c326e850--taupe-mousse-983e82.netlify.app)**
+👉 **[Click Here for Live Demo](taupe-mousse-983e82.netlify.app)**
 
 ---
 
