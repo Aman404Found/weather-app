@@ -24,7 +24,7 @@ An elegant, modern glassmorphic weather web application built using **Vanilla Ja
 - **📊 Auto-Fit Statistics Grid**: Fully responsive metric grid (`Wind Speed`, `Rain Chance`, `Humidity`, `UV Index`) using CSS Grid (`repeat(auto-fit, minmax(130px, 1fr))`) without requiring heavy media queries.
 - **⚡ GPU-Accelerated Micro-Animations**: Smooth entry keyframes (`fadeInUp`), loading spinners (`spin`), and skeleton shimmers (`pulse`) for tactile user feedback.
 - **🛡️ Defensive Error Handling**: Complete network validation checking `response.ok` before parsing JSON to catch HTTP 400/401 errors gracefully.
-- **🔐 Environment Variables**: Configured via `.env` and `src/config.js` to protect API keys from git history.
+- **🔐 Zero-Leak Environment Security**: Automated build-time key injection (`scripts/build-env.js`) ensuring API keys are never exposed in Git source code.
 
 ---
 
@@ -34,7 +34,7 @@ An elegant, modern glassmorphic weather web application built using **Vanilla Ja
 - **Styling**: Modular Vanilla CSS3 (Custom Design Tokens in `:root`)
 - **Typography**: `Outfit` Google Font
 - **API**: [Visual Crossing Weather API](https://www.visualcrossing.com/weather-api)
-- **Icons**: Clean emoji mapping system for weather condition feedback
+- **Deployment**: Netlify + Automated Build-Time Environment Injection
 
 ---
 
@@ -46,16 +46,20 @@ Organized following industry-standard separation of concerns:
 Weather App/
 ├── index.html            # Main HTML5 Semantic Layout
 ├── style.css             # Main Entry Stylesheet (Imports modular CSS)
-├── .env                  # Environment Variables (Ignored in Git)
+├── netlify.toml          # Netlify Build Configuration
+├── package.json          # npm Project Scripts & Config
+├── .env                  # Local Environment Variables (Ignored in Git)
 ├── .env.example          # Template for Environment Configuration
 ├── .gitignore            # Git Exclusions File
+├── scripts/              # Build Scripts
+│   └── build-env.js      # Automated Build-Time Key Injection Script
 ├── css/                  # CSS Design System Modules
 │   ├── variable.css      # CSS Variables & Design Tokens (:root)
 │   ├── base.css          # Reset, Typography & Application Container
 │   ├── animations.css    # GPU Keyframe Animations (@keyframes)
 │   └── components.css    # Search Pill, Hero Card, Stats Grid & Timeline
 └── src/                  # ES Module JavaScript Core
-    ├── config.js         # Environment & Configuration Token Handler
+    ├── config.js         # Generated Environment Config Module
     ├── state.js          # Central Application State & Date Helpers
     ├── api.js            # Network Service & Visual Crossing Fetch Logic
     ├── ui.js             # DOM Caching, Emoji Mapper & Render Functions
@@ -66,47 +70,44 @@ Weather App/
 
 ## 🚀 How to Run Locally
 
-No build tools or heavy Node dependencies required! Run directly in any modern browser:
-
-1. **Clone or Download the Repository**:
+1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/weather-app.git
+   git clone https://github.com/Aman404Found/weather-app.git
    cd weather-app
    ```
 
-2. **Configure Environment Variables**:
-   Copy `.env.example` to create `.env` and add your API key:
+2. **Configure Local Environment**:
+   Create a `.env` file and insert your Visual Crossing API key:
    ```bash
    cp .env.example .env
    ```
+   Add your key inside `.env`:
+   ```env
+   WEATHER_API_KEY=your_visual_crossing_api_key_here
+   ```
 
-3. **Launch with a Local Web Server**:
-   Because the project uses standard ES Modules (`type="module"`), run a lightweight HTTP server:
+3. **Build & Inject Config**:
+   Run the local build script to inject your key into `src/config.js`:
+   ```bash
+   npm run build
+   ```
 
-   - **Using VS Code**: Right-click `index.html` ➔ **Open with Live Server**.
-   - **Using Python**:
-     ```bash
-     python3 -m http.server 8000
-     ```
-     Then open `http://localhost:8000` in your browser.
-
-   - **Using Node.js (`npx`)**:
-     ```bash
-     npx serve .
-     ```
+4. **Launch Local Server**:
+   Open `index.html` via VS Code **Live Server** or run:
+   ```bash
+   npx serve .
+   ```
 
 ---
 
-## 🔑 Environment Configuration
+## 🔑 Netlify Deployment & Security
 
-API keys are managed via `.env` and `src/config.js`:
+Secrets are protected from GitHub using automated build-time injection:
 
-```env
-# .env
-WEATHER_API_KEY=ACEVYVWVQ3WN3MURAGMTVQRBN
-```
-
-`src/config.js` safely exports `CONFIG.WEATHER_API_KEY` for `src/api.js` to consume.
+1. In **Netlify Site Settings** ➔ **Environment variables**, set `WEATHER_API_KEY`.
+2. When deploying, Netlify runs `npm run build` (`netlify.toml`).
+3. `scripts/build-env.js` injects `WEATHER_API_KEY` into `src/config.js` on Netlify's server during build.
+4. Your API key remains **100% hidden from Git commits**.
 
 ---
 
