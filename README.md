@@ -77,7 +77,7 @@ Weather App/
    ```
 
 2. **Configure Local Environment**:
-   Create a `.env` file and insert your Visual Crossing API key:
+   Create an `.env` file and insert your Visual Crossing API key:
    ```bash
    cp .env.example .env
    ```
